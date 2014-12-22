@@ -2,7 +2,7 @@
 
 angular
 	//if you change module name you need to change app.js that loads it.
-	.module('my.widget', ['adf.provider'])
+	.module('my.widget', ['adf.provider', 'templates'])
  	.config(function (dashboardProvider) {
 	 	/**
 	 	 * Available options
@@ -47,9 +47,9 @@ angular
 			title: 'Hello name',
 			description: 'Hello name',
 			controller: 'myCtrl',
-			templateUrl: 'widget/index.html',
+			templateUrl: '../src/widget/index.html',
 			edit: {
-				templateUrl: 'widget/edit.html'
+				templateUrl: '../src/widget/edit.html'
 			}
 	 	});
 	}).controller('myCtrl', function ($scope, config) {
