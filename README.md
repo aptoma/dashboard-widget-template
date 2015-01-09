@@ -15,6 +15,10 @@ Run
 
 Start editing your widget, files of interest are in the src/widget folder.
 
+The files in `src/app` as well as `src/index.html` are only there to allow
+testing the widget in a sample dashboard setup. When publishing the widget,
+only the widgets folder is taken into account.
+
 ## Limitations / Problems / Gotchas
 
 A widget must be registered with an unique name to the dashboardProvider e.g
