@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
+var refresh = browserSync.notify;
 var reload = browserSync.reload;
 var pkg = require('./package');
 var del = require('del');
@@ -20,7 +21,8 @@ var config = {
       '!src/vendor/**/*.js'
     ],
     widget: 'src/widget/**/*.js',
-    index: 'src/index.html'
+    index: 'src/index.html',
+    styles: 'src/widget/*.css'
 };
 
 //generate angular templates using html2js
@@ -69,6 +71,12 @@ gulp.task('html', function () {
         }));
 });
 
+
+gulp.task('css', function () {
+    return gulp.src(config.styles)
+        .pipe(reload({stream:true}));
+});
+
 //clean temporary directories
 gulp.task('clean', del.bind(null, [config.build]));
 
@@ -100,5 +108,6 @@ gulp.task('serve', ['build'], function () {
 
     gulp.watch(config.index, reload);
     gulp.watch(config.js, ['jshint']);
+    gulp.watch(config.styles, ['css']);
     gulp.watch(config.tpl, ['templates', reload]);
 });
