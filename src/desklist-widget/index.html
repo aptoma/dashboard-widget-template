@@ -1,0 +1,42 @@
+<div class="desk-list-handles clearfix widget-header">
+    <div>
+    <button ng-click="refresh()">{{'Refresh'|tr}}</button>
+
+        {{'category'|tr }}: <select ng-options="c.name as c.name for c in categories"
+                                    ng-model="category"><option value="">Any</option></select>
+
+    {{'status'|tr }}:
+        <button ng-click="list.offsetClass = 'list-offset-0'">{{::list.labels.published}}</button>
+        <button ng-click="list.offsetClass = 'list-offset-1'">{{::list.labels.waiting}}</button>
+        <button ng-click="list.offsetClass = 'list-offset-2'">{{::list.labels.draft}}</button>
+    </div>
+</div>
+<div class="widget-content">
+    <div class="widget-content-main">
+        <div class="desk-lists" ng-class="list.offsetClass">
+            <div class="desk-list"><h3><img
+                src="http://drp-dev.aptoma.no/gunnar/drpublish/gfx/icons/iconic/vector/svggen.php?file=publish&fill=%23E3904A"
+                width="40"
+                style="vertical-align: top; margin-right: 6px"/>{{::list.labels.published}}
+            </h3>
+
+                <desklist-article-list status="published" category="{{category}}"></desklist-article-list>
+            </div>
+            <div class="desk-list"><h3><img
+                src="http://drp-dev.aptoma.no/gunnar/drpublish/gfx/icons/iconic/vector/svggen.php?file=clock&fill=%23E3904A"
+                width="26"
+                style="vertical-align: bottom; margin-right: 6px"/>{{::list.labels.waiting}}
+            </h3>
+
+                <desklist-article-list status="waiting" category="{{category}}"></desklist-article-list>
+            </div>
+            <div class="desk-list"><h3><img
+                src="http://drp-dev.aptoma.no/gunnar/drpublish/gfx/icons/iconic/vector/svggen.php?file=pen&fill=%23E3904A"
+                width="26"
+                style="vertical-align: bottom; margin-right: 6px"/>{{::list.labels.draft}}</h3>
+
+                <desklist-article-list status="draft" category="{{category}}"></desklist-article-list>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,4 +31,8 @@ angular
 				}]
 			}
 		};
-	});
+	})
+    .value('token', '-')
+    .value('apiBase', 'http://drp-dev.aptoma.no/gunnar/drpublish/api')
+    .value('publication', 'Solarius')
+;

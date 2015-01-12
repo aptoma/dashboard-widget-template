@@ -4,25 +4,23 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
-var refresh = browserSync.notify;
 var reload = browserSync.reload;
 var pkg = require('./package');
 var del = require('del');
-var _ = require('lodash');
 
 var config = {
     port: 3000,
     build: 'build',
     dist: 'build/dist',
     tmp: 'build/tmp',
-    tpl: 'src/widget/*.html',
+    tpl: 'src/desklist-widget/*.html',
     js: [
       'src/**/*.js',
       '!src/vendor/**/*.js'
     ],
-    widget: 'src/widget/**/*.js',
+    widget: 'src/desklist-widget/**/*.js',
     index: 'src/index.html',
-    styles: 'src/widget/*.css'
+    styles: 'src/desklist-widget/*.css'
 };
 
 //generate angular templates using html2js
@@ -62,7 +60,7 @@ gulp.task('html', function () {
         .pipe($.sourcemaps.init())
         .pipe($.if('*.js', $.ngAnnotate()))
         .pipe($.if('*.js', $.uglify({
-            mangle: false,
+            mangle: false
         })))
         .pipe($.sourcemaps.write())
         .pipe(gulp.dest(config.tmp))
@@ -74,7 +72,7 @@ gulp.task('html', function () {
 
 gulp.task('css', function () {
     return gulp.src(config.styles)
-        .pipe(reload({stream:true}));
+        .pipe(reload({stream: true}));
 });
 
 //clean temporary directories

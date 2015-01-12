@@ -1,0 +1,24 @@
+<div ng-if="subStatuses.length > 1">
+    <span ng-repeat="subStatus in subStatuses" ng-click="filters.subStatus = subStatus" class="sub-status" ng-class="{selected: filters.subStatus === subStatus}">
+        {{subStatus}}
+    </span>
+</div>
+<ol class="list-unstyled" ng-if="articles">
+    <li ng-repeat="article in articles | filter:filters" class="desk-list-item" data-article-id="{{article.id}}"
+        ng-class="{withdrawn: article.isWithdrawn}">
+        <span>{{::article.modified | drpdate}}</span>
+        <span tooltip-html-unsafe="{{::article | desklistArticleListTooltip}}" class="list-item-title">{{::article.title
+            ||
+            '-'}}</span>
+        <div class="article-info pull-right">
+            <span class="tags"
+                  tooltip-html-unsafe="{{::article | desklistTagsTooltip}}">{{::article.tags.length || 0}} tags
+            </span>
+            <a ng-href="{{::article.liveArticleUrl}}" target="_blank">View</a>
+            <a ng-href="{{::article.editArticleUrl}}" target="_blank">Edit</a>
+            <span ng-repeat="extra in article.extraContent" ng-click="extra.onClick()" ng-class="extra.cssClass"
+                  ng-bind-html="extra.html" tooltip-html-unsafe="{{extra.toolTip}}"></span>
+        </div>
+        <div class="expanded-content"></div>
+    </li>
+</ol>

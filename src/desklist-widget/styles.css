@@ -1,0 +1,99 @@
+.widget-content {
+    position: relative;
+    height: 400px;
+}
+
+.widget-content-main {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.desk-lists {
+    position: relative;
+    left: 0;
+    height: 100%;
+    transition: left .4s;
+    transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940); // ease-out-quad
+}
+
+.desk-lists.list-offset-1 {
+    left: -50%;
+}
+
+.desk-lists.list-offset-2 {
+    left: -100%;
+}
+
+.desk-list {
+    position: absolute;
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.desk-list:nth-child(1) {
+    margin-left: 0;
+}
+
+.desk-list:nth-child(2) {
+    margin-left: 50%;
+}
+
+.desk-list:nth-child(3) {
+    margin-left: 100%;
+}
+
+.desk-list-item {
+    padding: 2px;
+}
+
+.desk-list-item:nth-of-type(2n -1) {
+    background: #f5f5f5;
+}
+
+.withdrawn .list-item-title {
+    color: #d84442;
+}
+
+.sub-status {
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.selected {
+    font-weight: bold;
+}
+
+
+.notes-container {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    background-image: url('http://drp-dev.aptoma.no/gunnar/drpublish/gfx/icons/iconic/vector/svggen.php?file=chat&fill=%23295571');
+    background-size: auto 16px;
+}
+.notes-container.no-notes {
+    opacity: 0.2;
+}
+
+.notes-count {
+    position: absolute;
+    display: block;
+    top: -5px;
+    right: -4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #295571;
+}
+
+.expanded-content {
+    margin-left: 80px;
+}
