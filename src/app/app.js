@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-	.module('app', ['ui.router', 'adf', 'my.widget'])
+	.module('app', ['ui.router', 'adf', 'drp.desklist'])
 	.config(function ($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
@@ -23,7 +23,7 @@ angular
 						styleClass: 'col-md-12',
 						widgets: [{
 							title: 'My Widget',
-							type: 'mywidget',
+							type: 'desklist',
 							config: {
 							}
 						}]
@@ -31,8 +31,4 @@ angular
 				}]
 			}
 		};
-	})
-    .value('token', '-')
-    .value('apiBase', 'http://drp-dev.aptoma.no/gunnar/drpublish/api')
-    .value('publication', 'Solarius')
-;
+	});

@@ -2,7 +2,7 @@
 
 angular
     //if you change module name you need to change app.js that loads it.
-    .module('drp.desklist', ['ngSanitize', 'adf.provider', 'templates', 'ui.bootstrap'])
+    .module('drp.desklist', ['ngSanitize', 'adf.provider', 'templates', 'ui.bootstrap', 'common.services.token'])
     .config(function (dashboardProvider, $tooltipProvider) {
         /**
          * Available options
@@ -75,7 +75,11 @@ angular
         });
 
     })
-    .factory('DrPublish', function ($http, apiBase, token, publication) {
+    .factory('DrPublish', function ($http, TokenService) {
+        var token = TokenService.get();
+        var decodedToken = TokenService.getDecoded();
+        var publication = decodedToken.drp.pub;
+        var apiBase = decodedToken.drp.url;
 
         function getHttpOptions() {
             return {
