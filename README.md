@@ -45,8 +45,16 @@ Generate a token here, set your apiKey as value for sub, iss property and use yo
 
 	http://jwt.io/?value=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI8aW5zZXJ0IHlvdXIgYXBpS2V5PiIsInN1YiI6IjxpbnNlcnQgeW91ciBhcGlLZXk-In0.MGm_l8-yTE8zsoCqOftn1AuFu06WAoBVqMz3qyqKPGA
 
-Register the widget with the API
+Register the widget with the API by sending a POST to ```//dashboardurl.com/widgets``` with a Json body containing the widget definition.
 
-	curl -i -X POST -H 'Authorization: bearer <YOUR JWT TOKEN>' \
-	-d '{ "url": "http://to/your/widget", "name": "angular module name" }' \
-	http://dashboardurl.com/widgets
+```json
+	{
+		"name": "widget name (app.js:26)",
+		"module": "module name (widget.js:5)",
+		"url": "url to javascript from /build/dist/",
+		"resources": [
+			"url to css from /build/dist/",
+			"any additional css or js resources"
+		]
+	}
+```
