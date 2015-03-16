@@ -15,14 +15,14 @@ var config = {
     build: 'build',
     dist: 'build/dist',
     tmp: 'build/tmp',
-    tpl: 'src/widget/*.html',
+    tpl: 'src/widget/**/*.html',
     js: [
       'src/**/*.js',
       '!src/vendor/**/*.js'
     ],
     widget: 'src/widget/**/*.js',
     index: 'src/index.html',
-    styles: 'src/widget/*.css'
+    styles: 'src/widget/**/*.css'
 };
 
 //generate angular templates using html2js
@@ -43,12 +43,12 @@ gulp.task('templates', function () {
 
 //build files for creating a dist release
 gulp.task('build:dist', ['clean'], function (cb) {
-    runSequence(['jshint', 'build', 'html'], 'concat', cb);
+    runSequence(['jshint', 'build', 'scripts'], 'concat', cb);
 });
 
 //build files for development
 gulp.task('build', ['clean'], function (cb) {
-    runSequence(['templates'], cb);
+    runSequence(['templates', 'css'], cb);
 });
 
 gulp.task('concat', function () {
@@ -57,23 +57,26 @@ gulp.task('concat', function () {
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('html', function () {
+gulp.task('scripts', function () {
     return gulp.src(config.widget)
         .pipe($.sourcemaps.init())
         .pipe($.if('*.js', $.ngAnnotate()))
         .pipe($.if('*.js', $.uglify({
-            mangle: false,
+            mangle: false
         })))
         .pipe($.sourcemaps.write())
         .pipe(gulp.dest(config.tmp))
         .pipe($.size({
-            title: 'html'
+            title: 'javascript'
         }));
 });
 
 
 gulp.task('css', function () {
     return gulp.src(config.styles)
+        .pipe($.csso())
+        .pipe($.concat('widget.dist.css'))
+        .pipe(gulp.dest(config.dist))
         .pipe(reload({stream:true}));
 });
 
